@@ -1,0 +1,1 @@
+../../Model/Base/Modelizer/Dependencies.json.swift

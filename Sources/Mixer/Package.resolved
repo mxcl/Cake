@@ -1,0 +1,43 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "OrderedSet",
+        "repositoryURL": "https://github.com/Weebly/OrderedSet",
+        "state": {
+          "branch": null,
+          "revision": "4247c60cc190dbbaff63ecfe42bd7a1f2cbaf225",
+          "version": "3.1.0"
+        }
+      },
+      {
+        "package": "Path.swift",
+        "repositoryURL": "https://github.com/mxcl/Path.swift",
+        "state": {
+          "branch": null,
+          "revision": "e915bc0cfb5bcee9d48adfdb9e8208d07291c0e8",
+          "version": "0.16.0"
+        }
+      },
+      {
+        "package": "llbuild",
+        "repositoryURL": "https://github.com/apple/swift-llbuild.git",
+        "state": {
+          "branch": "master",
+          "revision": "06a25536b8d7f6b43f93139dea15dd8f7873b8d9",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftPM",
+        "repositoryURL": "https://github.com/apple/swift-package-manager.git",
+        "state": {
+          "branch": "swift-DEVELOPMENT-SNAPSHOT-2019-02-03-a",
+          "revision": "9b6be668d93829f9ef0727ad2d2490e56487fedc",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

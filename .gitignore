@@ -1,0 +1,6 @@
+/.cake/swift-pm
+/.cake/Package.swift
+/.cake/*.json
+/.cake/Version.xcconfig
+/Sources/Mixer/Mixer.xcodeproj
+/Sources/Mixer/.build
