@@ -120,8 +120,9 @@ public func scaffold(_ option: ScaffoldingOption, cakeVersion: Version) throws -
             .cake(~>\(cakeVersion.constraintStringValue))
         ]
 
-        // specify your platforms and deployment targets here
-        platforms = [\(platforms.map(\.description).joined(separator: ", "))]
+        // you can specify your platforms and deployment targets like so
+        // NOTE: if unspecified we mirror the app-project’s settings
+        // platforms = [\(platforms.map(\.description).joined(separator: ", "))]
 
         // uncomment if you want to change the base-module-name
         // options.baseModuleName = "Bakeware"
