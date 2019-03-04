@@ -122,7 +122,7 @@ move the directory).
 
 > “You can do anything, but not everything.” —*David Allen*
 
-Cake makes using Swift packages in Xcode eay. Write out your
+Cake makes using Swift packages in Xcode easy. Write out your
 [`Cakefile`](Documents/Cakefile.md), **⌘B**, Cake fetches your deps and
 integrates them: no muss, no fuss.
 
@@ -151,7 +151,7 @@ you:
       │ └ …
       └ Weebly∕OrderedSet-3.1.0.swift
 
-Which generates to this in your `Cake.xcodeproj`:
+Which generates this in your `Cake.xcodeproj`:
 
 <img src='../gh-pages/Screenshot.Deps.png' width='269.5'>
 
@@ -178,7 +178,7 @@ Which you can then commit, *or not commit*: that’s up to you.
 ### Op‐Ed—an era for Swift µ-frameworks?
 
 CocoaPods and Carthage libraries tend to be on the *large* side, and this is at
-lesat partly because being modular has been historically hard and tedious when
+least partly because being modular has been historically hard and tedious when
 developing for Apple platforms and Swift. SwiftPM encourages smaller, tighter
 frameworks and using Cake means making apps with Swift packages is now possible.
 
