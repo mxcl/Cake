@@ -134,7 +134,7 @@ dependencies = [
     .github("Weebly/OrderedSet" ~> 3),
 ]
 
-// ^^ naturally using Cake to manage your deps is entirely optional
+// ^^ naturally, using Cake to manage your deps is entirely optional
 ```
 
 We figure out your deployment targets, we make your deps available to *all* your
@@ -239,3 +239,10 @@ like the “Build” number to: `$(CURRENT_PROJECT_VERSION)`.
   * [Advanced Module Hierarchies](Documents/Advanced-Module-Hierarchies.md)
 
 [Cakefile Reference]: Documents/Cakefile.md
+
+# Icons credit
+
+Icons made by [Google](https://www.flaticon.com/authors/google) and
+[Freepik](https://www.freepik.com) from
+[www.flaticon.com](https://www.flaticon.com) licensed by
+[CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/).

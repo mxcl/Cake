@@ -20,6 +20,11 @@ You may get errors in dependent modules when trying to use new API from higher
 modules. Xcode doesn’t know about the changes you make in higher modules in the
 lower ones until you build. So: `⌘B`.
 
+## Beach-balling
+
+Cake 1.0.0 is not multi-threaded (I know: lol), so give it a bit, it can take
+minutes if it is checking out deps.
+
 ## Changes are not present in build
 
 Sadly Xcode 10.2 seems to have a bug where static libraries that are themselves 
