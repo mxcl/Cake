@@ -81,6 +81,9 @@ import Module2
 > **Curious?** Cake is made with Cake, so is [Workbench], check out the sources
 > to see more about what a cake‐project looks like.
 
+> **Details**: Cake generates a sub-project (Cake.xcodeproj), you *lightly*
+> integrate this into your app’s project.
+
 [Workbench]: https://github.com/mxcl/Workbench
 
 ## Module hierarchies
@@ -179,7 +182,7 @@ lesat partly because being modular has been historically hard and tedious when
 developing for Apple platforms and Swift. SwiftPM encourages smaller, tighter
 frameworks and using Cake means making apps with Swift packages is now possible.
 
-Choose small, modular, small responsibility libraries with 100% code coverage
+Choose small, modular, single‐responsibility libraries with 100% code coverage
 that take semantic-versioning **seriously**. Reject bloated libraries that don’t
 know how to say no to feature requests.
 
