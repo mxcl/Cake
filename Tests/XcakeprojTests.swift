@@ -1,4 +1,5 @@
 @testable import XcakeProject
+import CakefileDescription
 import Foundation
 import Modelizer
 import XCTest

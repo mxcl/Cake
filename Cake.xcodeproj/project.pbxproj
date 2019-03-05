@@ -275,8 +275,6 @@
 		63402FA321B86FE3003F1B8E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		63402FC021B87602003F1B8E /* CakefileDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakefileDescriptionTests.swift; sourceTree = "<group>"; };
 		6343042421858C7D004A45F0 /* XcakeprojTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcakeprojTests.swift; sourceTree = "<group>"; };
-		6346050021DE59BD009FF5A4 /* CakefileDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CakefileDescription.swift; path = Sources/Model/CakefileDescription/CakefileDescription.swift; sourceTree = "<group>"; };
-		6346050121DE59BD009FF5A4 /* Version+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Version+.swift"; path = "Sources/Model/CakefileDescription/Version+.swift"; sourceTree = "<group>"; };
 		6371BA6B21EA75AE00AB2A41 /* iOS.LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iOS.LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63756DAF2209E43100DA9D7B /* TemporaryDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TemporaryDirectory.swift; path = ../Sources/Model/Base/XcodeProject/XcakeProject/Processor/TemporaryDirectory.swift; sourceTree = "<group>"; };
 		6378B33D21B603D4000DC86B /* Menu·$CAKE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Menu·$CAKE.swift"; sourceTree = "<group>"; };
@@ -299,7 +297,7 @@
 		63D7C3DA2208CA6C0096BF63 /* MixerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixerTests.swift; sourceTree = "<group>"; };
 		63DB0B99220DC78F00CEF31A /* cake-build */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cake-build"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63DB0B9B220DC78F00CEF31A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		63DB6E4D222ACF0700E69628 /* Cake.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Cake.entitlements; path = Sources/AppKit/Cake.entitlements; sourceTree = "<group>"; };
+		63DB6E4D222ACF0700E69628 /* Cake.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cake.entitlements; sourceTree = "<group>"; };
 		63E342E6218508FA008CF796 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E342E8218508FA008CF796 /* ModelizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelizerTests.swift; sourceTree = "<group>"; };
 		63E342EA218508FA008CF796 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -333,15 +331,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6346050421DE59C3009FF5A4 /* CakefileDescription */ = {
-			isa = PBXGroup;
-			children = (
-				6346050021DE59BD009FF5A4 /* CakefileDescription.swift */,
-				6346050121DE59BD009FF5A4 /* Version+.swift */,
-			);
-			name = CakefileDescription;
-			sourceTree = "<group>";
-		};
 		636FB05D2210B855007CE1CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,14 +385,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6378B3A021B60D54000DC86B /* Apps */ = {
+		6378B3A021B60D54000DC86B /* Targets */ = {
 			isa = PBXGroup;
 			children = (
 				63E342CF2185029C008CF796 /* AppKit */,
 				63DB0B9A220DC78F00CEF31A /* cake-build */,
 				639FB0CF21BB176300DAE087 /* Mixer */,
 			);
-			name = Apps;
+			name = Targets;
 			path = Sources;
 			sourceTree = "<group>";
 		};
@@ -431,6 +420,7 @@
 		63B53DC7218782A600D863E0 /* Detritus */ = {
 			isa = PBXGroup;
 			children = (
+				63DB6E4D222ACF0700E69628 /* Cake.entitlements */,
 				63B53DB421877F7900D863E0 /* Assets.xcassets */,
 				63B53DB621877F7900D863E0 /* Main.storyboard */,
 				63B53DB921877F7900D863E0 /* Info.plist */,
@@ -449,12 +439,10 @@
 		63E342C42185029C008CF796 = {
 			isa = PBXGroup;
 			children = (
-				63DB6E4D222ACF0700E69628 /* Cake.entitlements */,
 				63402FA321B86FE3003F1B8E /* README.md */,
 				6378B35521B60700000DC86B /* Model */,
 				632B98B921E63B2500FE1FAA /* Documents */,
-				6378B3A021B60D54000DC86B /* Apps */,
-				6346050421DE59C3009FF5A4 /* CakefileDescription */,
+				6378B3A021B60D54000DC86B /* Targets */,
 				63E342E7218508FA008CF796 /* Tests */,
 				6378B33F21B606B7000DC86B /* Cake.xcodeproj */,
 				63C9151222282ADC006492A3 /* Cake.xcconfig */,
@@ -838,7 +826,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -euxo pipefail\n\nrm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH\"/Kitchenware\n\ncp -pR \"$PROJECT_DIR\"/Sources/Kitchenware \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH\"\nsrc=\"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH\"/Kitchenware/Sources\n\nmkdir \"$src\"\ncp -pR \"$PROJECT_DIR\"/Sources/Model/CakefileDescription \"$src\"/Cakefile\n\npkd=\"$PROJECT_DIR\"/Sources/Mixer/.build/checkouts/swift-package-manager/Sources/PackageDescription4\ncp -pR \"$pkd\" \"$src\"/PackageDescription\n";
+			shellScript = "set -euxo pipefail\n\nrm -rf \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH\"/Kitchenware\n\ncp -pR \"$PROJECT_DIR\"/Sources/Kitchenware \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH\"\nsrc=\"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH\"/Kitchenware/Sources\n\nmkdir \"$src\"\ncp -pR \"$PROJECT_DIR\"/Sources/Model/CakefileDescription \"$src\"/Cakefile\n\npkd=\"$OBJROOT\"/mixer.build/checkouts/swift-package-manager/Sources/PackageDescription4\ncp -pR \"$pkd\" \"$src\"/PackageDescription\n";
 			showEnvVarsInLog = 0;
 		};
 		633AA206220F2D8F004AB319 /* Copy & Fix Install Names for mixer */ = {
@@ -862,7 +850,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -euxo pipefail\n\ncp \"$SCRIPT_INPUT_FILE_0\" \"$SCRIPT_OUTPUT_FILE_0\"\ncp \"$SCRIPT_INPUT_FILE_1\" \"$SCRIPT_OUTPUT_FILE_1\"\n\n/usr/bin/codesign --force --sign \"$EXPANDED_CODE_SIGN_IDENTITY\" --preserve-metadata=identifier,entitlements,flags --timestamp=none \"$SCRIPT_OUTPUT_FILE_0\"\n/usr/bin/codesign --force --sign \"$EXPANDED_CODE_SIGN_IDENTITY\" --preserve-metadata=identifier,entitlements,flags --timestamp=none \"$SCRIPT_OUTPUT_FILE_1\"\n\ninstall_name_tool -rpath \\\n    \"$DT_TOOLCHAIN_DIR\"/usr/lib/swift/macosx \\\n    @executable_path/../Frameworks \\\n    \"$SCRIPT_OUTPUT_FILE_0\"\ninstall_name_tool -rpath \\\n    \"$DT_TOOLCHAIN_DIR\"/usr/lib/swift/macosx \\\n    @executable_path/../Frameworks \\\n    \"$SCRIPT_OUTPUT_FILE_1\"\n\ninstall_name_tool -change \\\n    \"$SCRIPT_INPUT_FILE_1\" \\\n    @rpath/$(basename \"$SCRIPT_INPUT_FILE_1\") \\\n    \"$SCRIPT_OUTPUT_FILE_0\"\ninstall_name_tool -id \\\n    @rpath/$(basename \"$SCRIPT_OUTPUT_FILE_1\") \\\n    \"$SCRIPT_OUTPUT_FILE_1\"\n\n# build systems AMIRITE?\ntouch \"$SCRIPT_OUTPUT_FILE_2\" \n";
+			shellScript = "set -euxo pipefail\n\n# sigh\nrm -f \"$SCRIPT_OUTPUT_FILE_0\" \"$SCRIPT_OUTPUT_FILE_1\"\n\ncp \"$SCRIPT_INPUT_FILE_0\" \"$SCRIPT_OUTPUT_FILE_0\"\ncp \"$SCRIPT_INPUT_FILE_1\" \"$SCRIPT_OUTPUT_FILE_1\"\n\n/usr/bin/codesign --force --sign \"$EXPANDED_CODE_SIGN_IDENTITY\" --preserve-metadata=identifier,entitlements,flags --timestamp=none \"$SCRIPT_OUTPUT_FILE_0\"\n/usr/bin/codesign --force --sign \"$EXPANDED_CODE_SIGN_IDENTITY\" --preserve-metadata=identifier,entitlements,flags --timestamp=none \"$SCRIPT_OUTPUT_FILE_1\"\n\ninstall_name_tool -rpath \\\n    \"$DT_TOOLCHAIN_DIR\"/usr/lib/swift/macosx \\\n    @executable_path/../Frameworks \\\n    \"$SCRIPT_OUTPUT_FILE_0\"\ninstall_name_tool -rpath \\\n    \"$DT_TOOLCHAIN_DIR\"/usr/lib/swift/macosx \\\n    @executable_path/../Frameworks \\\n    \"$SCRIPT_OUTPUT_FILE_1\" || true\n# ^^ || true as Xcode 10.2-beta4 stopped setting this rpath\n\ninstall_name_tool -change \\\n    \"$SCRIPT_INPUT_FILE_1\" \\\n    @rpath/$(basename \"$SCRIPT_INPUT_FILE_1\") \\\n    \"$SCRIPT_OUTPUT_FILE_0\"\ninstall_name_tool -id \\\n    @rpath/$(basename \"$SCRIPT_OUTPUT_FILE_1\") \\\n    \"$SCRIPT_OUTPUT_FILE_1\"\n\n# build systems AMIRITE?\ntouch \"$SCRIPT_OUTPUT_FILE_2\" \n";
+			showEnvVarsInLog = 0;
 		};
 		63537998220E8350008449E9 /* swit build */ = {
 			isa = PBXShellScriptBuildPhase;
