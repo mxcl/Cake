@@ -28,7 +28,7 @@ class XcakeprojTests: XCTestCase {
             task.arguments = ["-list", "-json"]
             let data = try task.runSync().stdout.data
             let json = try JSONDecoder().decode(Output.self, from: data)
-            XCTAssertEqual(Set(json.project.targets), ["Batter·\(basename)", "Batter·b", "Batter·c", "Batter·d", "Cakefile", "Cakefile·Completion", "Batter", "Cake"])
+            XCTAssertEqual(Set(json.project.targets), ["Batter·\(basename)", "Batter·b", "Batter·c", "Batter·d", "Cakefile", "Cakefile·Completion", "Batter", "Cake", "Versionator"])
 
             // or cannot delete fixture dir and test fails
             for entry in try root.join(".cake").ls() where entry.kind == .file && entry.path.extension == "swift" {

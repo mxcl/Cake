@@ -51,6 +51,6 @@ class MixerTests: XCTestCase {
 
 private extension Path {
     static var mixer: Path {
-        return Bundle(for: MixerTests.self).path.parent/"Cake.app/Contents/Resources/mixer"
+        return Bundle(for: MixerTests.self).path.parent/"Cake.app/Contents/MacOS/mixer"
     }
 }
