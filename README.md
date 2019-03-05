@@ -113,7 +113,7 @@ textually or with a confounding GUI. With Cake, use the filesystem,
 relationships are not only easy to read, but also, trivial to refactor (just
 move the directory).
 
-> **Further Reading**: [Advanced module hierarchies](Document/Advanced-Module-Hierarchies.md)
+> **Further Reading**: [Advanced module hierarchies](Documents/Advanced-Module-Hierarchies.md)
 
 > **FAQ**: What should go in your `Base` module? Cake’s `Base` module contains
 > extensions on the standard library.
