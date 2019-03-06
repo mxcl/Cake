@@ -1653,7 +1653,7 @@ DAA9F9B983CE55D38B2F125BAD56FC0E /* Project object */ = {
 		"$(PROJECT_DIR)/Dependencies.json",
 	);
 	runOnlyForDeploymentPostprocessing = 0;
-	shellPath = /usr/bin/swift;
+	shellPath = "$(DT_TOOLCHAIN_DIR)/usr/bin/swift";
 	shellScript = "import func Darwin.fputs\nimport var Darwin.stderr\nimport ScriptingBridge\nimport AppKit\n\nfunc print(_ objs: Any...) {\n    let str = objs.reduce(into: \"\") { $0.append(\" \\($1)\") }\n    fputs(str, stderr)\n}\n\nlet apps = NSRunningApplication.runningApplications(withBundleIdentifier: \"dev.mxcl.Cake\")\n\nswitch apps.count {\ncase 0:\n    print(\"warning: Cake.app not running, Cakefile changes will not take effect\")\ncase 1:\n    guard let bundle = apps[0].bundleURL else {\n        print(\"Failed to obtain Cake.app location\")\n        exit(1)\n    }\n    guard let projectDir = ProcessInfo.processInfo.environment[\"PROJECT_DIR\"] else {\n        print(\"Failed to obtain PROJECT_DIR\")\n        exit(2)\n    }\n    let path = bundle.appendingPathComponent(\"Contents/MacOS/cake-build\").path\n    let task = Process()\n    task.launchPath = path\n    task.arguments = [String(apps[0].processIdentifier), projectDir]\n    try task.run()\n    task.waitUntilExit()\n    exit(task.terminationStatus)\ndefault:\n    print(\"error: More than one instance of Cake.app is running\")\n    exit(3)\n}\n";
 	showEnvVarsInLog = 0;
 };

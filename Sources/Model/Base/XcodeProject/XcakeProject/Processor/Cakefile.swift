@@ -28,12 +28,12 @@ struct Cakefile {
         }
     }
 
-    init(path: Path, L: Path, I: Path) throws {
+    init(path: Path, toolkit: Processor.Toolkit) throws {
         guard path.isFile else {
             throw E.noCakefile
         }
         self.path = path
-        self.dump = try parse(cakefile: path, L: L, I: I)
+        self.dump = try parse(cakefile: path, toolkit: toolkit)
         self.mtime = path.mtime
     }
 }
@@ -42,7 +42,7 @@ public struct CakefileParseError: LocalizedError {
     public let errorDescription: String?
 }
 
-private func parse(cakefile path: Path, L: Path, I: Path) throws -> CakefileDump {
+private func parse(cakefile path: Path, toolkit: Processor.Toolkit) throws -> CakefileDump {
     //TODO use stdin to `swift -`
     
     var contents = try String(contentsOf: path)
@@ -62,11 +62,11 @@ private func parse(cakefile path: Path, L: Path, I: Path) throws -> CakefileDump
         try contents.write(to: tmpfile)
         let tmppath = tmpdir.join("Cakefile.swift").string
         let task = Process()
-        task.launchPath = "/usr/bin/swift"
+        task.launchPath = toolkit.swift.string
         task.arguments = [
             "-module-name", "CakefileScript",
-            "-L", L.string,
-            "-I", I.string,
+            "-L", toolkit.L.string,
+            "-I", toolkit.I.string,
             "-lCakefile",
             tmppath]
         do {

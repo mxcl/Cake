@@ -7,7 +7,7 @@ class Dependencies {
     let cakefileRepresentation: [PackageSpecification]
     let json: DependenciesJSON
 
-    init(deps: [PackageSpecification], prefix: Path, bindir: Path, libpmdir: Path) throws {
+    init(deps: [PackageSpecification], prefix: Path, bindir: Path, libpmdir: Path, DEVELOPER_DIR: Path) throws {
         cakefileRepresentation = deps
 
         guard !deps.isEmpty else {
@@ -37,6 +37,8 @@ class Dependencies {
         let task = Process()
         task.launchPath = bindir.join("mixer").string
         task.arguments = [prefix.string, libpmdir.string]
+        task.environment = ProcessInfo.processInfo.environment
+        task.environment!["DEVELOPER_DIR"] = DEVELOPER_DIR.string
         let (stdout, _) = try task.runSync(tee: true)
 
         json = try decoder.decode(DependenciesJSON.self, from: stdout.data)

@@ -77,11 +77,10 @@ extension Kitchen: XcodeObserverDelegate {
 
         for path in diff.added {
             do {
-                //TODO ideally extract from xcode for this project
-                guard let xcodeVersion = xcodeObserver.xcodeProductBuildVersion else {
+                //TODO path needs to be determined from the Xcode for this project
+                guard let xcodePath = xcodeObserver.paths.first, let toolkit = Processor.Toolkit(cake: cakeVersion, xcode: xcodePath) else {
                     throw E.xcodeVersionUnavailable
                 }
-                let toolkit = Processor.Toolkit(cakeVersion: cakeVersion, xcodeProductBuildVersion: xcodeVersion)
                 let proj = try CakeProject(xcodeproj: path, toolkit: toolkit)
                 proj.delegate = self
                 cakes.append(proj)

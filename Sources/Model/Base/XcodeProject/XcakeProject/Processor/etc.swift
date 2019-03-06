@@ -14,6 +14,7 @@ import Path
 
 public extension Processor {
     struct Toolkit {
+        public let xcodePath: Path
         public let cakeVersion: Version
         public let xcodeProductBuildVersion: String
 
@@ -34,9 +35,20 @@ public extension Processor {
             return L.pm
         }
 
-        public init(cakeVersion: Version, xcodeProductBuildVersion: String) {
-            self.cakeVersion = cakeVersion
-            self.xcodeProductBuildVersion = xcodeProductBuildVersion
+        public var swift: Path {
+            return xcodePath/"Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift"
+        }
+
+        public init?(cake: Version, xcode: Path) {
+            guard let dict = NSDictionary(contentsOf: xcode.join("Contents/version.plist").url) else {
+                return nil
+            }
+            guard let v = dict["ProductBuildVersion"] as? String else {
+                return nil
+            }
+            xcodeProductBuildVersion = v
+            cakeVersion = cake
+            xcodePath = xcode
         }
     }
 }

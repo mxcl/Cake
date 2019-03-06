@@ -58,7 +58,7 @@ public class CakeProject {
     public func updateDependencies() throws {
         let caked = prefix.join(".cake")
         let task = Process()
-        task.launchPath = "/usr/bin/swift"
+        task.launchPath = processor.toolkit.swift.string
         task.arguments = ["package",
             "--build-path", "swift-pm",
             "update"]

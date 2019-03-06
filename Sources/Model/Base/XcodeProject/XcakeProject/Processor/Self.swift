@@ -25,7 +25,7 @@ public class Processor {
     public var prefix: Path { return xcodeproj.parent }
     public var modelsPrefix: Path { return prefix/"Sources/Model" }
 
-    private let toolkit: Toolkit
+    public let toolkit: Toolkit
 
     public init(xcodeproj: Path, toolkit: Toolkit) throws {
         //TODO should load from JSON unless mtime is greater
@@ -87,7 +87,7 @@ public class Processor {
 
         if cakefile.dependencies != dependencies.cakefileRepresentation {
             //FIXME not DRY
-            dependencies = try Dependencies(deps: cakefile.dependencies, prefix: prefix, bindir: Bundle.main.executables, libpmdir: toolkit.pm)
+            dependencies = try Dependencies(deps: cakefile.dependencies, prefix: prefix, bindir: Bundle.main.executables, libpmdir: toolkit.pm, DEVELOPER_DIR: toolkit.xcodePath)
             needsGeneration = true
 
             //FIXME currently the Mixer writes dependencies.json, but maybe we should?
@@ -115,7 +115,7 @@ public class Processor {
 private extension Processor.Toolkit {
     func make() throws {
         let task = Process()
-        task.launchPath = "/usr/bin/make"
+        task.launchPath = xcodePath.join("Contents/Developer/usr/bin/make").string
         task.currentDirectoryPath = Bundle.main.path.Contents.KitchenWare.string
         var env = ProcessInfo.processInfo.environment
         env["OUTDIR"] = makedir.string
@@ -130,12 +130,12 @@ private extension Processor.Toolkit {
     func foo(prefix: Path) throws -> (Cakefile, Dependencies) {
         try make()
         let cakefile = try bar(prefix: prefix)
-        let dependencies = try Dependencies(deps: cakefile.dependencies, prefix: prefix, bindir: Bundle.main.executables, libpmdir: pm)
+        let dependencies = try Dependencies(deps: cakefile.dependencies, prefix: prefix, bindir: Bundle.main.executables, libpmdir: pm, DEVELOPER_DIR: xcodePath)
         return (cakefile, dependencies)
     }
 
     func bar(prefix: Path) throws -> Cakefile {
-        let cakefile = try Cakefile(path: prefix/"Cakefile.swift", L: L, I: I)
+        let cakefile = try Cakefile(path: prefix/"Cakefile.swift", toolkit: self)
         if let requirement = cakefile.cakeRequirement, !requirement.contains(cakeVersion) {
             throw E.toolkit(required: requirement, available: cakeVersion)
         }

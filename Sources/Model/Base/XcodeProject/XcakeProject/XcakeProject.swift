@@ -59,7 +59,7 @@ public class XcakeProject: XcodeProject {
         cakefileTarget["SUPPORTED_PLATFORMS"] = ["macosx"]
         let script = cakefileTarget.add(script: .cakefileScript)
         script.name = "Regenerate Cake.xcodeproj"
-        script.shellPath = "/usr/bin/swift"
+        script.shellPath = "$(DT_TOOLCHAIN_DIR)/usr/bin/swift"
         script.inputPaths = ["$(PROJECT_DIR)/../Cakefile.swift"]
         script.outputPaths = [
             "$(PROJECT_DIR)/Cakefile.json",

@@ -1,5 +1,6 @@
 import Version
 import Cocoa
+import Base
 import Path
 
 //TODO we're hiding errors when Xcode objects cannot be made etc.
@@ -121,14 +122,8 @@ public class XcodeObserver: NSObject {
         return xcode.activeWorkspace
     }
 
-    public var xcodeProductBuildVersion: String? {
-        guard let path = runningApplications.first?.bundleURL.flatMap(Path.init) else {
-            return nil
-        }
-        guard let dict = NSDictionary(contentsOf: path.join("Contents/version.plist").url) else {
-            return nil
-        }
-        return dict["ProductBuildVersion"] as? String
+    public var paths: [Path] {
+        return runningApplications.compactMap(\.bundleURL).compactMap(Path.init)
     }
 }
 
