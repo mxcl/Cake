@@ -2490,6 +2490,10 @@ FDED9CB4A42F8E451B9CD92A9214BED0 /* PBXTargetDependency */ = {
 	buildSettings = {
 		LD = /usr/bin/true;
 		OTHER_SWIFT_FLAGS = (
+			"-I",
+			"$(HOME)/Library/Developer/Cake/DerivedData/$(XCODE_PRODUCT_BUILD_VERSION)/lib",
+			"-L",
+			"$(HOME)/Library/Developer/Cake/DerivedData/$(XCODE_PRODUCT_BUILD_VERSION)/lib",
 		);
 		PRODUCT_MODULE_NAME = Script;
 		PRODUCT_NAME = CakefileScript;
@@ -2598,6 +2602,10 @@ BF01A86C4D19E080F58AF28A3610DF80 /* Release */ = {
 	buildSettings = {
 		LD = /usr/bin/true;
 		OTHER_SWIFT_FLAGS = (
+			"-I",
+			"$(HOME)/Library/Developer/Cake/DerivedData/$(XCODE_PRODUCT_BUILD_VERSION)/lib",
+			"-L",
+			"$(HOME)/Library/Developer/Cake/DerivedData/$(XCODE_PRODUCT_BUILD_VERSION)/lib",
 		);
 		PRODUCT_MODULE_NAME = Script;
 		PRODUCT_NAME = CakefileScript;

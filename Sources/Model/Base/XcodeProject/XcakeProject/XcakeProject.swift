@@ -65,12 +65,14 @@ public class XcakeProject: XcodeProject {
             "$(PROJECT_DIR)/Cakefile.json",
             "$(PROJECT_DIR)/Dependencies.json"]
 
+        let libdir = "$(HOME)/Library/Developer/Cake/DerivedData/$(XCODE_PRODUCT_BUILD_VERSION)/lib"
+
         let cakefileCompletionTarget = addNativeTarget(name: "Cakefile·Completion", type: .commandLineTool)
         try cakefileCompletionTarget.build(source: mainGroup.add(file: prefix/"Cakefile.swift", name: .basename))
         cakefileCompletionTarget["SDKROOT"] = "macosx"
         cakefileCompletionTarget["SUPPORTED_PLATFORMS"] = ["macosx"]
         cakefileCompletionTarget["LD"] = "/usr/bin/true"  // prevents link failure
-        cakefileCompletionTarget["OTHER_SWIFT_FLAGS"] = ["-I", Bundle.main.resourcePath, "-L", Bundle.main.sharedFrameworksPath]
+        cakefileCompletionTarget["OTHER_SWIFT_FLAGS"] = ["-I", libdir, "-L", libdir]
         cakefileCompletionTarget["PRODUCT_NAME"] = "CakefileScript"
         cakefileCompletionTarget["PRODUCT_MODULE_NAME"] = "Script"
 
