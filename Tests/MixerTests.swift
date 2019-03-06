@@ -1,4 +1,6 @@
+@testable import Processor
 import Modelizer
+import Version
 import XCTest
 import Path
 
@@ -21,6 +23,15 @@ class MixerTests: XCTestCase {
     }
 
     func testOutput() throws {
+        let buildDir = Bundle(for: MixerTests.self).path.parent
+        guard let cake = Bundle(path: buildDir.join("Cake.app").string), let xcodePath = Path.xcode else {
+            return XCTFail()
+        }
+        guard let toolkit = Processor.Toolkit(cake: cake, xcode: xcodePath) else {
+            return XCTFail()
+        }
+        try toolkit.make()
+
         let deps = try tmpdir.path.join(".cake").mkdir()
         try """
             // swift-tools-version:4.2
@@ -33,7 +44,7 @@ class MixerTests: XCTestCase {
 
         let task = Process()
         task.launchPath = Path.mixer.string
-        task.arguments = [tmpdir.string]
+        task.arguments = [tmpdir.string, toolkit.pm.string]
         let stdout = try task.runSync(tee: true).stdout
 
         let decoder = JSONDecoder()
@@ -52,5 +63,12 @@ class MixerTests: XCTestCase {
 private extension Path {
     static var mixer: Path {
         return Bundle(for: MixerTests.self).path.parent/"Cake.app/Contents/MacOS/mixer"
+    }
+    static var xcode: Path? {
+        return ProcessInfo.processInfo
+            .environment["PATH"]?
+            .split(separator: ":")
+            .first.flatMap(Path.init)?
+            .parent.parent.parent.parent
     }
 }

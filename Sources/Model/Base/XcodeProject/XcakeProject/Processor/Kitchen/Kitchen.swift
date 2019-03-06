@@ -19,11 +19,11 @@ public extension Version {
 
 /// knows what Xcode projects are open and which are Cakes
 public class Kitchen {
-    public init(cake version: Version) {
-        self.cakeVersion = version
+    public init(cake: Bundle) {
+        self.cakeBundle = cake
     }
 
-    let cakeVersion: Version
+    let cakeBundle: Bundle
 
     public weak var delegate: KitchenDelegate? {
         didSet {
@@ -78,7 +78,7 @@ extension Kitchen: XcodeObserverDelegate {
         for path in diff.added {
             do {
                 //TODO path needs to be determined from the Xcode for this project
-                guard let xcodePath = xcodeObserver.paths.first, let toolkit = Processor.Toolkit(cake: cakeVersion, xcode: xcodePath) else {
+                guard let xcodePath = xcodeObserver.paths.first, let toolkit = Processor.Toolkit(cake: cakeBundle, xcode: xcodePath) else {
                     throw E.xcodeVersionUnavailable
                 }
                 let proj = try CakeProject(xcodeproj: path, toolkit: toolkit)
