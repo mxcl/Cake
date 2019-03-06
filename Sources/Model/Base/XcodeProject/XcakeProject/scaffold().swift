@@ -160,6 +160,17 @@ public func scaffold(_ option: ScaffoldingOption, cakeVersion: Version) throws -
         #include? "Version.xcconfig"
 
         """.write(to: cakeXCConfig)
+
+    //FIXME we are writing this anyway due to bug: https://github.com/mxcl/Cake/issues/49
+    // we need to do a proper fix, which may require this to be build-phase in the App’s
+    // project: https://gist.github.com/mbinna/4068616#gistcomment-2734031
+    try """
+        CURRENT_PROJECT_VERSION = 0
+        SEMANTIC_PROJECT_VERSION = 0.0.0
+        SEMANTIC_PROJECT_VERSION[config=Debug] = 0.0.0-debug
+
+        """.write(to: cakeProject.caked/"Version.xcconfig")
+
     if let detritus = detritus {
         mainProject.baseConfiguration = detritus.add(file: cakeXCConfig, name: .basename)
     }

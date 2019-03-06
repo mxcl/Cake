@@ -155,6 +155,9 @@ public class XcakeProject: XcodeProject {
             v=$(git describe --tags --always --abbrev=0)
             n=$(git rev-list HEAD --count)
 
+            if [[ -z $v ]]; then v="0.0.0"; fi
+            if [[ -z $n ]]; then n="0"; fi
+
             echo "CURRENT_PROJECT_VERSION = $n" > Version.xcconfig
             echo "SEMANTIC_PROJECT_VERSION = $v" >> Version.xcconfig
             echo "SEMANTIC_PROJECT_VERSION[config=Debug] = $v-debug" >> Version.xcconfig
