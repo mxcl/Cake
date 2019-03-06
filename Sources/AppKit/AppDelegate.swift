@@ -6,7 +6,7 @@ import Cake
 class AppDelegate: NSObject, NSApplicationDelegate {
     let menu = NSMenu()
     let statusBarItem = NSStatusBar.system.statusItem(withLength: 22)
-    let kitchen = Kitchen(cake: Bundle.main.version)
+    let kitchen = Kitchen(cake: Bundle.main)
     let updater = AppUpdater(owner: "mxcl", repo: "Cake")
     var hotKey: HotKey!
 

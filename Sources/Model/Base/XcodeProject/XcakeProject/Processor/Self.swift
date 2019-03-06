@@ -87,7 +87,7 @@ public class Processor {
 
         if cakefile.dependencies != dependencies.cakefileRepresentation {
             //FIXME not DRY
-            dependencies = try Dependencies(deps: cakefile.dependencies, prefix: prefix, bindir: Bundle.main.executables, libpmdir: toolkit.pm, DEVELOPER_DIR: toolkit.xcodePath)
+            dependencies = try Dependencies(deps: cakefile.dependencies, prefix: prefix, bindir: toolkit.bindir, libpmdir: toolkit.pm, DEVELOPER_DIR: toolkit.xcodePath)
             needsGeneration = true
 
             //FIXME currently the Mixer writes dependencies.json, but maybe we should?
@@ -113,24 +113,10 @@ public class Processor {
 
 
 private extension Processor.Toolkit {
-    func make() throws {
-        let task = Process()
-        task.launchPath = xcodePath.join("Contents/Developer/usr/bin/make").string
-        task.currentDirectoryPath = Bundle.main.path.Contents.KitchenWare.string
-        var env = ProcessInfo.processInfo.environment
-        env["OUTDIR"] = makedir.string
-        task.environment = env
-        try task.run()
-        task.waitUntilExit()
-        if task.terminationReason == .uncaughtSignal || task.terminationStatus != 0 {
-            throw CocoaError.error(.executableLoad)
-        }
-    }
-
     func foo(prefix: Path) throws -> (Cakefile, Dependencies) {
         try make()
         let cakefile = try bar(prefix: prefix)
-        let dependencies = try Dependencies(deps: cakefile.dependencies, prefix: prefix, bindir: Bundle.main.executables, libpmdir: pm, DEVELOPER_DIR: xcodePath)
+        let dependencies = try Dependencies(deps: cakefile.dependencies, prefix: prefix, bindir: bindir, libpmdir: pm, DEVELOPER_DIR: xcodePath)
         return (cakefile, dependencies)
     }
 

@@ -14,6 +14,7 @@ import Path
 
 public extension Processor {
     struct Toolkit {
+        let cakePath: Path
         public let xcodePath: Path
         public let cakeVersion: Version
         public let xcodeProductBuildVersion: String
@@ -34,12 +35,29 @@ public extension Processor {
         var pm: Path {
             return L.pm
         }
+        var bindir: Path {
+            return cakePath.Contents.MacOS
+        }
+
+        func make() throws {
+            let task = Process()
+            task.launchPath = xcodePath.join("Contents/Developer/usr/bin/make").string
+            task.currentDirectoryPath = cakePath.Contents.KitchenWare.string
+            var env = ProcessInfo.processInfo.environment
+            env["OUTDIR"] = makedir.string
+            task.environment = env
+            try task.run()
+            task.waitUntilExit()
+            if task.terminationReason == .uncaughtSignal || task.terminationStatus != 0 {
+                throw CocoaError.error(.executableLoad)
+            }
+        }
 
         public var swift: Path {
             return xcodePath/"Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift"
         }
 
-        public init?(cake: Version, xcode: Path) {
+        public init?(cake: Bundle, xcode: Path) {
             guard let dict = NSDictionary(contentsOf: xcode.join("Contents/version.plist").url) else {
                 return nil
             }
@@ -47,8 +65,9 @@ public extension Processor {
                 return nil
             }
             xcodeProductBuildVersion = v
-            cakeVersion = cake
+            cakeVersion = cake.version
             xcodePath = xcode
+            cakePath = cake.path
         }
     }
 }
