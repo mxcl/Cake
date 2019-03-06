@@ -11,7 +11,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 63537995220E8343008449E9 /* Build configuration list for PBXAggregateTarget "mixer" */;
 			buildPhases = (
-				63537998220E8350008449E9 /* swit build */,
+				63537998220E8350008449E9 /* swift build */,
 			);
 			dependencies = (
 			);
@@ -204,6 +204,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 19F01C205BDC9FA3129D8949BE2CB5C4;
 			remoteInfo = "Deps·AppUpdater";
+		};
+		63D6506722305A370088523B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6378B33F21B606B7000DC86B /* Cake.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = DCF843C187E023E2097ACF9EABA93DD6;
+			remoteInfo = Dependencies;
 		};
 		63DB0BB3220DC78F00CEF31A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -507,6 +514,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				63D6506822305A370088523B /* PBXTargetDependency */,
 				6353799A220E83A4008449E9 /* PBXTargetDependency */,
 				63983C6521CAFE8800487B21 /* PBXTargetDependency */,
 				63DB0BB7220DC81D00CEF31A /* PBXTargetDependency */,
@@ -850,10 +858,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -euxo pipefail\n\n# sigh\nrm -f \"$SCRIPT_OUTPUT_FILE_0\" \"$SCRIPT_OUTPUT_FILE_1\"\n\ncp \"$SCRIPT_INPUT_FILE_0\" \"$SCRIPT_OUTPUT_FILE_0\"\ncp \"$SCRIPT_INPUT_FILE_1\" \"$SCRIPT_OUTPUT_FILE_1\"\n\n/usr/bin/codesign --force --sign \"$EXPANDED_CODE_SIGN_IDENTITY\" --preserve-metadata=identifier,entitlements,flags --timestamp=none \"$SCRIPT_OUTPUT_FILE_0\"\n/usr/bin/codesign --force --sign \"$EXPANDED_CODE_SIGN_IDENTITY\" --preserve-metadata=identifier,entitlements,flags --timestamp=none \"$SCRIPT_OUTPUT_FILE_1\"\n\ninstall_name_tool -rpath \\\n    \"$DT_TOOLCHAIN_DIR\"/usr/lib/swift/macosx \\\n    @executable_path/../Frameworks \\\n    \"$SCRIPT_OUTPUT_FILE_0\"\ninstall_name_tool -rpath \\\n    \"$DT_TOOLCHAIN_DIR\"/usr/lib/swift/macosx \\\n    @executable_path/../Frameworks \\\n    \"$SCRIPT_OUTPUT_FILE_1\" || true\n# ^^ || true as Xcode 10.2-beta4 stopped setting this rpath\n\ninstall_name_tool -change \\\n    \"$SCRIPT_INPUT_FILE_1\" \\\n    @rpath/$(basename \"$SCRIPT_INPUT_FILE_1\") \\\n    \"$SCRIPT_OUTPUT_FILE_0\"\ninstall_name_tool -id \\\n    @rpath/$(basename \"$SCRIPT_OUTPUT_FILE_1\") \\\n    \"$SCRIPT_OUTPUT_FILE_1\"\n\n# build systems AMIRITE?\ntouch \"$SCRIPT_OUTPUT_FILE_2\" \n";
+			shellScript = "set -exo pipefail\n\n# sigh\nrm -f \"$SCRIPT_OUTPUT_FILE_0\" \"$SCRIPT_OUTPUT_FILE_1\"\n\ncp \"$SCRIPT_INPUT_FILE_0\" \"$SCRIPT_OUTPUT_FILE_0\"\ncp \"$SCRIPT_INPUT_FILE_1\" \"$SCRIPT_OUTPUT_FILE_1\"\n\n# In CI we don’t code sign\nif [[ -n \"$EXPANDED_CODE_SIGN_IDENTITY\" ]]; then\n    /usr/bin/codesign --force --sign \"$EXPANDED_CODE_SIGN_IDENTITY\" --preserve-metadata=identifier,entitlements,flags --timestamp=none \"$SCRIPT_OUTPUT_FILE_0\"\n    /usr/bin/codesign --force --sign \"$EXPANDED_CODE_SIGN_IDENTITY\" --preserve-metadata=identifier,entitlements,flags --timestamp=none \"$SCRIPT_OUTPUT_FILE_1\"\nfi\n\ninstall_name_tool -rpath \\\n    \"$DT_TOOLCHAIN_DIR\"/usr/lib/swift/macosx \\\n    @executable_path/../Frameworks \\\n    \"$SCRIPT_OUTPUT_FILE_0\"\n\n#install_name_tool -rpath \\\n#    \"$DT_TOOLCHAIN_DIR\"/usr/lib/swift/macosx \\\n#    @executable_path/../Frameworks \\\n#    \"$SCRIPT_OUTPUT_FILE_1\"\n# ^^ Xcode 10.2-beta4 stopped setting this rpath\n\ninstall_name_tool -change \\\n    \"$SCRIPT_INPUT_FILE_1\" \\\n    @rpath/$(basename \"$SCRIPT_INPUT_FILE_1\") \\\n    \"$SCRIPT_OUTPUT_FILE_0\"\ninstall_name_tool -id \\\n    @rpath/$(basename \"$SCRIPT_OUTPUT_FILE_1\") \\\n    \"$SCRIPT_OUTPUT_FILE_1\"\n\n# build systems AMIRITE?\ntouch \"$SCRIPT_OUTPUT_FILE_2\" \n";
 			showEnvVarsInLog = 0;
 		};
-		63537998220E8350008449E9 /* swit build */ = {
+		63537998220E8350008449E9 /* swift build */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -862,7 +870,7 @@
 			);
 			inputPaths = (
 			);
-			name = "swit build";
+			name = "swift build";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -926,6 +934,11 @@
 			isa = PBXTargetDependency;
 			name = Cake;
 			targetProxy = 63983C6421CAFE8800487B21 /* PBXContainerItemProxy */;
+		};
+		63D6506822305A370088523B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Dependencies;
+			targetProxy = 63D6506722305A370088523B /* PBXContainerItemProxy */;
 		};
 		63DB0BB7220DC81D00CEF31A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
