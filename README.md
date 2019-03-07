@@ -12,7 +12,7 @@ A modular app gains:
 * **Hierarchy**. Once you start creating modules you automatically
     arrange them so that some have more importance than others.
     This naturally leads to a *structured* codebase where new files nestle into
-    their logical, encapulated homes, *effortlessly*.
+    their logical, encapsulated homes, *effortlessly*.
 * **Organization**. You no longer have to cram everything concerning an area of
     responsibility into a single file to gain from file-private. Instead
     separate all that code out into multiple files in its own module and use
@@ -52,8 +52,8 @@ help me continue my work, I appreciate it 🙏🏻
 > then starting on the first one.” —*Mark Twain*
 
 Cake is an app that runs in your menu bar and watches your Xcode projects. If
-you chose to integrate Cake it will automatically generate your module hierarchy
-based on your directory structure. For example:
+you chose to integrate Cake into your App’s xcodeproj it will automatically
+generate your module hierarchy based on your directory structure. For example:
 
     .
     └ Sources
@@ -76,7 +76,7 @@ import Module2
 > in its root.
 
 > **Delicious**: All your modules are built *statically* so there’s no
-> launch-time consequences and the era of micro-frameworks can truly begin.
+> launch-time consequences.
 
 > **Curious?** Cake is made with Cake, so is [Workbench], check out the sources
 > to see more about what a cake‐project looks like.
@@ -108,7 +108,7 @@ directories.
 
 Here `Foo` depends on `Base` and thus, `Foo` can *now* import `Base`.
 
-*All* other tools require you to specify relationships *cryptically* with either
+*All* other tools require you to specify relationships *cryptically*, either
 textually or with a confounding GUI. With Cake, use the filesystem,
 relationships are not only easy to read, but also, trivial to refactor (just
 move the directory).
@@ -175,6 +175,16 @@ Which you can then commit, *or not commit*: that’s up to you.
 
 [more with your Cakefile]: Documents/Cakefile.md
 
+### Carthage & CocoaPods
+
+We detect Carthage and automatically make it so your modules can use those
+Carthage dependencies.
+[CocoaPods support is in the works](https://github.com/mxcl/Cake/issues/50).
+
+Note, this only applies to cake modules (the `Batter`); for your App target
+follow the instructions provided by CocoaPods and Carthage themselves; nothing
+is different.
+
 ### Op‐Ed—an era for Swift µ-frameworks?
 
 CocoaPods and Carthage libraries tend to be on the *large* side, and this is at
@@ -216,7 +226,7 @@ memory consumption.
 
 # Bonus Features
 
-## Extracting Version from Git
+## Extracting your app’s version from Git
 
 Cake determines your App’s version from your git tags, to use them simply
 set each target’s “Version” to: `$(SEMANTIC_PROJECT_VERSION)` and if you
@@ -227,6 +237,11 @@ like the “Build” number to: `$(CURRENT_PROJECT_VERSION)`.
 ## Xcode Remote Control 
 
 <img src='../gh-pages/Screenshot.Xcode-Menu.png' width='724'>
+
+# Caveats
+
+Due to some Xcode bugs Cake is not a complete *Cake‐walk* in use. Please see our
+[troubleshooting](Documents/Troubleshooting.md) guide for details.
 
 # Documentation
 

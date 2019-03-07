@@ -196,7 +196,6 @@ public extension XcodeProject {
         case folder = "folder"
     }
 
-
     var baseConfiguration: PBXFileReference {
         set {
             guard let confs = pbxproj.rootObject?.buildConfigurationList?.buildConfigurations else {

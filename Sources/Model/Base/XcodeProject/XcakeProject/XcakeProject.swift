@@ -141,6 +141,21 @@ public class XcakeProject: XcodeProject {
                     try target.depend(on: cakefileTarget)
                 }
             }
+
+          //// integrate Carthage stuff if its there
+            if prefix.Carthage.isDirectory, prefix.Cartfile.isFile {
+                for target in batterTargets {
+                    for spec in platforms {
+                        let platform = spec.platform
+                        for sdk in platform.sdks {
+                            let key = "FRAMEWORK_SEARCH_PATHS[sdk=\(sdk)*]"
+                            let value = "../Carthage/Build/\(platform.carthageDir)"
+                            target.debug.buildSettings[key] = value
+                            target.release.buildSettings[key] = value
+                        }
+                    }
+                }
+            }
         }
 
     ////// Kitchenware group
@@ -268,6 +283,26 @@ private extension DependenciesJSON.Package {
             return "\(name)-\(version)"
         } else {
             return name
+        }
+    }
+}
+
+private extension Platform {
+    var sdks: [String] {
+        switch self {
+        case .iOS:
+            return ["iphoneos", "iphonesimulator"]
+        case .macOS:
+            return ["macosx"]
+        }
+    }
+
+    var carthageDir: String {
+        switch self {
+        case .iOS:
+            return "iOS"
+        case .macOS:
+            return "Mac"
         }
     }
 }
