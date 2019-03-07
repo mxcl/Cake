@@ -1670,7 +1670,7 @@ B0CCAA5D1D192F6963E1F5560239A386 /* Determine Version */ = {
 	);
 	runOnlyForDeploymentPostprocessing = 0;
 	shellPath = /bin/sh;
-	shellScript = "v=$(git describe --tags --always --abbrev=0)\nn=$(git rev-list HEAD --count)\n\necho \"CURRENT_PROJECT_VERSION = $n\" > Version.xcconfig\necho \"SEMANTIC_PROJECT_VERSION = $v\" >> Version.xcconfig\necho \"SEMANTIC_PROJECT_VERSION[config=Debug] = $v-debug\" >> Version.xcconfig\n";
+	shellScript = "v=$(git describe --tags --always --abbrev=0)\nn=$(git rev-list HEAD --count)\n\nif [[ -z $v ]]; then v=\"0.0.0\"; fi\nif [[ -z $n ]]; then n=\"0\"; fi\n\necho \"CURRENT_PROJECT_VERSION = $n\" > Version.xcconfig\necho \"SEMANTIC_PROJECT_VERSION = $v\" >> Version.xcconfig\necho \"SEMANTIC_PROJECT_VERSION[config=Debug] = $v-debug\" >> Version.xcconfig\n";
 	showEnvVarsInLog = 0;
 };
 /* End PBXShellScriptBuildPhase section */
