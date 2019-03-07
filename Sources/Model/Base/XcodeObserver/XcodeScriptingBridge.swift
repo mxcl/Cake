@@ -68,7 +68,7 @@ public class Xcode {
 
     var workspaces: [Path] {
         return documents.filter {
-            $0.extension == "xcodeproj"
+            ["xcodeproj", "xcworkspace"].contains($0.extension)
         }
     }
 
