@@ -4,3 +4,5 @@
 /.cake/Version.xcconfig
 /Sources/Mixer/Mixer.xcodeproj
 /Sources/Mixer/.build
+**/xcuserdata
+.DS_Store
