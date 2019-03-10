@@ -120,7 +120,7 @@ public class Processor {
         task.arguments = ["package",
                           "--build-path", "swift-pm",
                           "update"]
-        task.currentDirectoryPath = prefix.string
+        task.currentDirectoryPath = prefix.join(".cake").string
         try task.run()
         task.waitUntilExit()
         if task.terminationReason == .uncaughtSignal || task.terminationStatus != 0 {
