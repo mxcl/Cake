@@ -19,7 +19,27 @@ open class XcodeProject {
 
     /// pass the path to the .xcodeproj *directory*
     public init(existing: Path) throws {
-        proj = try XcodeProj(pathString: existing.string)
+
+        if existing.extension == "xcworkspace" {
+            let wsp = try XCWorkspace(pathString: existing.string)
+            let prj: [String] = wsp.data.children.compactMap {
+                switch $0 {
+                case .file(let ref) where ref.location.path == "Pods/Pods.xcodeproj":
+                    return nil
+                case .file(let ref):
+                    return ref.location.path
+                default:
+                    return nil
+                }
+            }
+            guard prj.count == 1 else {
+                throw E.workspaceHasTooManyProjects
+            }
+            proj = try XcodeProj(pathString: existing.parent.join(prj[0]).string)
+        } else {
+            proj = try XcodeProj(pathString: existing.string)
+        }
+
         parentDirectory = existing.parent
 
         guard proj.pbxproj.rootObject != nil else {
@@ -172,6 +192,7 @@ public extension XcodeProject {
         case readNoProductsGroup
         case groupHasNoPath
         case invalidBuildConfigurations
+        case workspaceHasTooManyProjects
     }
 
     enum Name {
