@@ -146,7 +146,7 @@ public class XcakeProject: XcodeProject {
 
                 let podPorject = try XcodeProject(existing: prefix.Pods / "Pods.xcodeproj")
 
-                if let podTarget = podPorject.nativeTargets.last {
+                if let podTarget = podPorject.nativeTargets.first(where: { $0.name.contains("Pods-") }) {
 
                     for target in batterTargets {
                         try target.depend(on: podTarget)
