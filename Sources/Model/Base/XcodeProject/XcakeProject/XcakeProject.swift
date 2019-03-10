@@ -147,7 +147,7 @@ public class XcakeProject: XcodeProject {
 
                 let podPoroject = try XcodeProject(existing: prefix.Pods / "Pods.xcodeproj")
 
-                if let podTarget = podPoroject.nativeTargets.first(where: { $0.name.contains("Pods-") }) {
+                if let podTarget = podPoroject.nativeTargets.first(where: { $0.name.hasPrefix("Pods-") }) {
 
                     let pods = try mainGroup.add(group: caked, name: .custom("Pods"))
                     let debugConfigurationFile = pods.add(file: prefix.Pods / "Target Support Files/\(podTarget.name)/\(podTarget.name).debug.xcconfig", name: .basename)
