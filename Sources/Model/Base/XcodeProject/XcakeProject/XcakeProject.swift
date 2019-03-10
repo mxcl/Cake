@@ -145,18 +145,19 @@ public class XcakeProject: XcodeProject {
             //// integrate Cocoapods stuff if its there
             if prefix.Podfile.isFile, prefix.Pods.isDirectory {
 
-                let podPorject = try XcodeProject(existing: prefix.Pods / "Pods.xcodeproj")
+                let podPoroject = try XcodeProject(existing: prefix.Pods / "Pods.xcodeproj")
 
-                if let podTarget = podPorject.nativeTargets.first(where: { $0.name.contains("Pods-") }) {
+                if let podTarget = podPoroject.nativeTargets.first(where: { $0.name.contains("Pods-") }) {
+
+                    let pods = try mainGroup.add(group: caked, name: .custom("Pods"))
+                    let debugConfigurationFile = pods.add(file: prefix.Pods / "Target Support Files/\(podTarget.name)/\(podTarget.name).debug.xcconfig", name: .basename)
+                    let releaseConfigurationFile = pods.add(file: prefix.Pods / "Target Support Files/\(podTarget.name)/\(podTarget.name).release.xcconfig", name: .basename)
 
                     for target in batterTargets {
                         try target.depend(on: podTarget)
+                        target.debug.baseConfiguration = debugConfigurationFile
+                        target.release.baseConfiguration = releaseConfigurationFile
                     }
-
-                    let pods = try mainGroup.add(group: caked, name: .custom("Pods"))
-
-                    self.baseConfiguration = pods.add(file: prefix.Pods / "Target Support Files/\(podTarget.name)/\(podTarget.name).debug.xcconfig", name: .basename)
-                    self.baseConfiguration = pods.add(file: prefix.Pods / "Target Support Files/\(podTarget.name)/\(podTarget.name).release.xcconfig", name: .basename)
                 }
             }
 
