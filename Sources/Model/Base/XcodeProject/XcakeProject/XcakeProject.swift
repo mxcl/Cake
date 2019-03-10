@@ -141,25 +141,6 @@ public class XcakeProject: XcodeProject {
                     try target.depend(on: cakefileTarget)
                 }
             }
-            
-            //// integrate Cocoapods stuff if its there
-            if prefix.Podfile.isFile, prefix.Pods.isDirectory {
-
-                let podProject = try XcodeProject(existing: prefix.Pods / "Pods.xcodeproj")
-
-                if let podTarget = podProject.nativeTargets.first(where: { $0.name.hasPrefix("Pods-") }) {
-
-                    let pods = try mainGroup.add(group: caked, name: .custom("Pods"))
-                    let debugConfigurationFile = pods.add(file: prefix.Pods / "Target Support Files/\(podTarget.name)/\(podTarget.name).debug.xcconfig", name: .basename)
-                    let releaseConfigurationFile = pods.add(file: prefix.Pods / "Target Support Files/\(podTarget.name)/\(podTarget.name).release.xcconfig", name: .basename)
-
-                    for target in batterTargets {
-                        try target.depend(on: podTarget)
-                        target.debug.baseConfiguration = debugConfigurationFile
-                        target.release.baseConfiguration = releaseConfigurationFile
-                    }
-                }
-            }
 
           //// integrate Carthage stuff if its there
             if prefix.Carthage.isDirectory, prefix.Cartfile.isFile {
@@ -182,6 +163,25 @@ public class XcakeProject: XcodeProject {
 
         try batterTarget.build(source: kitchenware.add(file: caked/"Batter.swift"))
         try thirdPartyTarget?.build(source: kitchenware.add(file: caked/"Dependencies.swift"))
+
+    ////// integrate Cocoapods if available
+        if prefix.Podfile.isFile, prefix.Pods.isDirectory {
+
+            let podProject = try XcodeProject(existing: prefix.Pods / "Pods.xcodeproj")
+
+            if let podTarget = podProject.nativeTargets.first(where: { $0.name.hasPrefix("Pods-") }) {
+
+                let targetSupportFiles = prefix.Pods/"Target Support Files"/podTarget.name
+                let debugConfigurationFile = kitchenware.add(file: targetSupportFiles/"\(podTarget.name).debug.xcconfig", name: .basename)
+                let releaseConfigurationFile = kitchenware.add(file: targetSupportFiles/"\(podTarget.name).release.xcconfig", name: .basename)
+
+                for target in batterTargets {
+                    try target.depend(on: podTarget)
+                    target.debug.baseConfiguration = debugConfigurationFile
+                    target.release.baseConfiguration = releaseConfigurationFile
+                }
+            }
+        }
 
     ////// Versionator
         let versionator = addAggregateTarget(name: "Versionator")
