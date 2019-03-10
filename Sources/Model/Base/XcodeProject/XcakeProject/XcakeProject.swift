@@ -199,7 +199,7 @@ public class XcakeProject: XcodeProject {
             """)
         vscript.name = "Determine Version"
         vscript.outputPaths = ["Version.xcconfig"]
-        //TODO input paths into git some file
+        vscript.inputPaths = ["../.git/refs/tags"]
 
     ////// Cake.a
         cakeTarget = addNativeTarget(name: "Cake", type: .staticLibrary)
