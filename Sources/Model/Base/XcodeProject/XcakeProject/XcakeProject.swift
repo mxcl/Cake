@@ -142,6 +142,7 @@ public class XcakeProject: XcodeProject {
                 }
             }
             
+            //// integrate Cocoapods stuff if its there
             if prefix.Podfile.isFile, prefix.Pods.isDirectory {
 
                 let podPorject = try XcodeProject(existing: prefix.Pods / "Pods.xcodeproj")
@@ -150,10 +151,7 @@ public class XcakeProject: XcodeProject {
 
                     for target in batterTargets {
                         try target.depend(on: podTarget)
-                        try target.link(to: podTarget)
                     }
-                    try batterTarget.depend(on: podTarget)
-                    try batterTarget.link(to: podTarget)
 
                     let pods = try mainGroup.add(group: caked, name: .custom("Pods"))
 
