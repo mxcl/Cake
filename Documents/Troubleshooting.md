@@ -30,10 +30,11 @@ minutes if it is checking out deps.
 Sadly Xcode 10.2 seems to have a bug where static libraries that are themselves 
 just accumulations of other static libraries are not always rebuilt. The only
 easy solution is cleaning the build :( Or you can open the build folder and
-delete `Cake.a` and `Batter.a` and then build.
+delete `Cake.a`, `Batter.a` and the `.a` for the module you changed and then
+build.
 
 If this isn’t fixed for 10.2 GM we will build a single Cake.framework instead
-which should fix it.
+(for debug builds) which should fix it.
 
 ## No syntax highlighting in new files
 
