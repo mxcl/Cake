@@ -177,9 +177,8 @@ Which you can then commit, *or not commit*: that’s up to you.
 
 ### Carthage & CocoaPods
 
-We detect Carthage and automatically make it so your modules can use those
-Carthage dependencies.
-[CocoaPods support is in the works](https://github.com/mxcl/Cake/issues/50).
+If your app uses Carthage or CocoaPods we detect that and integrate them so
+your cake modules (the `Batter`) can use these dependencies.
 
 Note, this only applies to cake modules (the `Batter`); for your App target
 follow the instructions provided by CocoaPods and Carthage themselves; nothing
