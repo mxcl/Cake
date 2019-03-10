@@ -141,6 +141,26 @@ public class XcakeProject: XcodeProject {
                     try target.depend(on: cakefileTarget)
                 }
             }
+            
+            if prefix.Podfile.isFile, prefix.Pods.isDirectory {
+
+                let podPorject = try XcodeProject(existing: prefix.Pods / "Pods.xcodeproj")
+
+                if let podTarget = podPorject.nativeTargets.last {
+
+                    for target in batterTargets {
+                        try target.depend(on: podTarget)
+                        try target.link(to: podTarget)
+                    }
+                    try batterTarget.depend(on: podTarget)
+                    try batterTarget.link(to: podTarget)
+
+                    let pods = try mainGroup.add(group: caked, name: .custom("Pods"))
+
+                    self.baseConfiguration = pods.add(file: prefix.Pods / "Target Support Files/\(podTarget.name)/\(podTarget.name).debug.xcconfig", name: .basename)
+                    self.baseConfiguration = pods.add(file: prefix.Pods / "Target Support Files/\(podTarget.name)/\(podTarget.name).release.xcconfig", name: .basename)
+                }
+            }
 
           //// integrate Carthage stuff if its there
             if prefix.Carthage.isDirectory, prefix.Cartfile.isFile {
