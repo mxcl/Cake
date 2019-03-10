@@ -109,6 +109,25 @@ public class Processor {
             return false
         }
     }
+
+    public func updateDependencies() throws {
+        if dependencies.isEmpty {
+            throw E.noDependenciesInCakefile
+        }
+
+        let task = Process()
+        task.launchPath = toolkit.swift.string
+        task.arguments = ["package",
+                          "--build-path", "swift-pm",
+                          "update"]
+        task.currentDirectoryPath = prefix.string
+        try task.run()
+        task.waitUntilExit()
+        if task.terminationReason == .uncaughtSignal || task.terminationStatus != 0 {
+            throw CocoaError.error(.executableLoad)
+        }
+        try generate(force: true)
+    }
 }
 
 

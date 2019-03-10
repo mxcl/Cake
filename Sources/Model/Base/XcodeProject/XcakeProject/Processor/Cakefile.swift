@@ -7,6 +7,7 @@ public enum E: Error {
     case noCakefile
     case executionFailed(String, args: [String], exit: Int32)
     case toolkit(required: Range<Version>, available: Version)
+    case noDependenciesInCakefile
 }
 
 public typealias ProcessorError = E

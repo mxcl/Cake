@@ -39,6 +39,8 @@ extension AppDelegate {
         }
         do {
             try kitchen.cakes[index].updateDependencies()
+        } catch ProcessorError.noDependenciesInCakefile {
+            alert(message: "No dependencies in Cakefile.", title: "noop")
         } catch {
             alert(error)
         }

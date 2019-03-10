@@ -7,6 +7,10 @@ class Dependencies {
     let cakefileRepresentation: [PackageSpecification]
     let json: DependenciesJSON
 
+    var isEmpty: Bool {
+        return json.packages.isEmpty
+    }
+
     init(deps: [PackageSpecification], prefix: Path, bindir: Path, libpmdir: Path, DEVELOPER_DIR: Path) throws {
         cakefileRepresentation = deps
 
