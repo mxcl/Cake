@@ -1,5 +1,7 @@
 ![Cake](../gh-pages/Cake.png)
 
+**We are aware of Xcode 11, probably don’t commit to Cake at this time**
+
 Modules are a powerful Swift feature, yet existing tooling makes modulizing your
 projects *so* tedious that most people don’t bother.
 
